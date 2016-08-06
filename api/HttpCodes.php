@@ -1,5 +1,5 @@
 <?php
-namespace Manager;
+namespace Api;
 
 /**
  * Class HttpCodes: Carries all HTTP codes that this application uses.
@@ -22,4 +22,9 @@ class HttpCodes
      * Not Found
      */
     const NOT_FOUND = 404;
+
+    /**
+     * Server Error
+     */
+    const SERVER_ERROR = 500;
 }

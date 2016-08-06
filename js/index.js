@@ -41,7 +41,10 @@
                         $('.colors_list').append(colorsHtml);
                     },
                     404: function (response) {
-                        alert(message.msg);
+                        alert(response.responseText);
+                    },
+                    500: function (response) {
+                        alert(response.responseText);
                     }
                 }
             });
@@ -77,7 +80,10 @@
 
                     },
                     404: function (response) {
-                        alert(message.msg);
+                        alert(response.responseText);
+                    },
+                    500: function (response) {
+                        alert(response.responseText);
                     }
                 }
             });

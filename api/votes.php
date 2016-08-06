@@ -13,17 +13,18 @@ try {
     $votesManager = new Manager\VotesManager();
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'GET':
-            http_response_code(Manager\HttpCodes::SUCCESS);
             echo json_encode($votesManager->Get($_GET['color_id']));
+            http_response_code(HttpCodes::SUCCESS);
             break;
         default:
-            http_response_code(Manager\HttpCodes::BAD_REQUEST);
-            throw new Exception('Method not supported yet.');
+            echo json_encode('Method not supported yet.');
+            http_response_code(HttpCodes::BAD_REQUEST);
             break;
     }
-} catch (Exception $e) {
-    if (Manager\HttpCodes::BAD_REQUEST != http_response_code()) {
-        http_response_code(Manager\HttpCodes::NOT_FOUND);
-    }
-    echo json_encode(array('msg' => $e->getMessage()));
+} catch (\RuntimeException $re) {
+    http_response_code(HttpCodes::SERVER_ERROR);
+    echo json_encode($re->getMessage());
+} catch (\Exception $e) {
+    http_response_code(HttpCodes::NOT_FOUND);
+    echo json_encode($e->getMessage());
 }

@@ -22,9 +22,15 @@ class Connect
             return self::$_connect;
         }
 
-        return self::$_connect = new \PDO(
-            'mysql:host=' . self::DB_SERVER . ';dbname=' . self::DB_NAME, self::DB_USER, self::DB_PASS
-        );
+        try {
+            self::$_connect = new \PDO(
+                'mysql:host=' . self::DB_SERVER . ';dbname=' . self::DB_NAME, self::DB_USER, self::DB_PASS
+            );
+
+            return self::$_connect;
+        } catch (\PDOException $e) {
+            throw new \RuntimeException('There\'s a database error; please contact support.');
+        }
     }
 }
 
